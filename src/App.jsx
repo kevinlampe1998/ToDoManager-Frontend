@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-// https://todomanager-backend.onrender.com/
-
 const App = () => {
   const registerForm = useRef();
   const loginForm = useRef();
@@ -177,7 +175,22 @@ const App = () => {
     
     fetchToDos();
 
-    location.reload();
+    const newTitle = document.createElement('h3');
+    newTitle.append(title);
+    const currentTitle = event.target.parentElement.parentElement.firstChild.children[1];
+
+    const newDescription = document.createElement('div');
+    newDescription.append(description);
+    const currentDescription = event.target.parentElement.parentElement.firstChild.children[2];
+    
+    const parent = event.target.parentElement.parentElement.firstChild;
+    parent.replaceChild(newTitle, currentTitle);
+    parent.replaceChild(newDescription, currentDescription);
+
+    const changeButton = event.target.nextSibling;
+
+    event.target.style.display = 'none';
+    changeButton.style.display = 'block';
   };
   
   const deleteToDo = async (event) => {
